@@ -1,0 +1,5 @@
+selenium==4.33.0
+beautifulsoup4==4.13.4
+requests==2.32.3
+webdriver-manager==4.0.2
+google-api-python-client==2.166.0
