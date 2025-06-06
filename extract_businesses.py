@@ -13,7 +13,7 @@ from selenium.common.exceptions import (
     StaleElementReferenceException, TimeoutException, ElementClickInterceptedException
 )
 
-api_key = "AIzaSyDYVja5R4GhmgpkO9tK5l6wdqkBFpo7QjI"
+api_key = ""
 cse_id = "a595ae02b0cab45d2"
 
 SOCIAL_DOMAINS = {
