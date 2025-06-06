@@ -35,6 +35,57 @@ It supports both a beautiful GUI and a fast, interactive CLI, making it perfect 
 
 ---
 
+## 🔑 Google Custom Search API Setup
+
+To enable social media link extraction, you **must provide your own Google Custom Search API key and Search Engine ID**.
+
+### How to Get Your API Key and CSE ID
+
+1. **Create a Google Cloud Project:**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/).
+   - Create a new project (or select an existing one).
+
+2. **Enable Custom Search API:**
+   - In the Cloud Console, go to **APIs & Services > Library**.
+   - Search for **Custom Search API** and enable it for your project.
+
+3. **Get Your API Key:**
+   - Go to **APIs & Services > Credentials**.
+   - Click **Create Credentials > API key**.
+   - Copy your API key.
+
+4. **Create a Custom Search Engine (CSE):**
+   - Go to [Google Custom Search Engine](https://cse.google.com/cse/all).
+   - Click **Add** and enter any site (e.g., `facebook.com`) to create the engine.
+   - After creation, go to the CSE control panel.
+   - Under **Sites to search**, select **Search the entire web but emphasize included sites**.
+   - Copy your **Search engine ID** (CSE ID) from the control panel.
+
+5. **Add Your Keys to the Project:**
+   - Open `extract_businesses.py`.
+   - Find these lines near the top:
+     ```python
+     api_key = "YOUR_API_KEY"
+     cse_id = "YOUR_CSE_ID"
+     ```
+   - Replace `"YOUR_API_KEY"` and `"YOUR_CSE_ID"` with your actual values.
+
+   Example:
+   ```python
+   api_key = "AIzaSyD...yourkey..."
+   cse_id = "0123456789abcdefg:abcde_fghij"
+   ```
+
+---
+
+**Without your own API key and CSE ID, social media link extraction will not work.**  
+If you hit quota errors, create a new key or enable billing for higher limits.
+
+For more help, see the [Google Custom Search API docs](https://developers.google.com/custom-search/v1/overview).
+
+---
+
+
 ## 🛠️ Installation
 
 1. **Clone the repo:**
