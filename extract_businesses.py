@@ -64,7 +64,7 @@ def save_unique_businesses(businesses, output_file="businesses.json"):
         print("📭 No new businesses found to save.")
 
 def extract_businesses(driver, max_results=3, output_file="businesses.json", live_callback=None, stop_flag_func=None):
-    """Extracts business information from Google Maps results."""
+    """Extracts business information from Google Maps results, filtering for businesses with NO website."""
     businesses = []
     seen_names = set()
     scroll_attempts = 0
@@ -102,17 +102,20 @@ def extract_businesses(driver, max_results=3, output_file="businesses.json", liv
 
                 cleaned_data = extract_business_info([business])
 
-                if stop_flag_func and stop_flag_func():
-                    break
-
-                if live_callback:
-                    for biz in cleaned_data:
-                        live_callback(biz)
-
-                print(f"✅ Collected: {name}\n")
-                businesses.extend(cleaned_data)
+                # === FILTER: Only add if NO website ===
+                for biz in cleaned_data:
+                    if not biz.get("website") or biz.get("website") == "N/A":
+                        if live_callback:
+                            live_callback(biz)
+                        print(f"✅ Collected (no website): {name}\n")
+                        businesses.append(biz)
+                        if len(businesses) >= max_results:
+                            break
 
                 if len(businesses) >= max_results:
+                    break
+
+                if stop_flag_func and stop_flag_func():
                     break
 
             except (StaleElementReferenceException, TimeoutException, ElementClickInterceptedException) as e:
